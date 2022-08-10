@@ -12,7 +12,7 @@ namespace GitHubIssueClassification2
         [LoadColumn(0)]
         public string Date { get; set; }
         [LoadColumn(1)]
-        public string Label { get; set; }
+        public string Order { get; set; }
         [LoadColumn(2)]
         public string Close { get; set; }
         [LoadColumn(3)]
@@ -60,6 +60,6 @@ namespace GitHubIssueClassification2
     public class OrderPrediction
     {
         [ColumnName("PredictedLabel")]
-        public string Label;
+        public string Order;
     }
 }

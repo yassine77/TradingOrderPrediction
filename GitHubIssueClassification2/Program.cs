@@ -31,7 +31,7 @@ PredictIssue();
 
 IEstimator<ITransformer> ProcessData()
 {
-    var pipeline = _mlContext.Transforms.Conversion.MapValueToKey(inputColumnName: "Label", outputColumnName: "Label")
+    var pipeline = _mlContext.Transforms.Conversion.MapValueToKey(inputColumnName: "Order", outputColumnName: "Label")
         .Append(_mlContext.Transforms.Text.FeaturizeText(inputColumnName: "Date", outputColumnName: "DateFeaturized"))
         .Append(_mlContext.Transforms.Text.FeaturizeText(inputColumnName: "Close", outputColumnName: "CloseFeaturized"))
         .Append(_mlContext.Transforms.Text.FeaturizeText(inputColumnName: "Volume", outputColumnName: "VolumeFeaturized"))
@@ -96,7 +96,7 @@ IEstimator<ITransformer> BuildAndTrainModel(IDataView trainingDataView, IEstimat
         MACD = "-153,5439788"
     };
     var prediction = _predEngine.Predict(issue);
-    Console.WriteLine($"=============== Single Prediction just-trained-model - Result: {prediction.Label} ===============");
+    Console.WriteLine($"=============== Single Prediction just-trained-model - Result: {prediction.Order} ===============");
     return trainingPipeline;
 }
 
@@ -150,5 +150,5 @@ void PredictIssue()
     };
     _predEngine = _mlContext.Model.CreatePredictionEngine<Candle, OrderPrediction>(loadedModel);
     var prediction = _predEngine.Predict(singleIssue);
-    Console.WriteLine($"=============== Single Prediction - Result: {prediction.Label} ===============");
+    Console.WriteLine($"=============== Single Prediction - Result: {prediction.Order} ===============");
 }
